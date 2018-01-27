@@ -1,0 +1,53 @@
+.container{
+  padding-bottom: 20px;
+}
+#logo{
+  height:50px;
+  margin-left: 0px;
+  outline-offset: 30px;
+}
+#name{
+  padding:30px;
+}
+#text-right{
+  text-align: right;
+}
+#white{
+  font-size: 20px;
+  color: white;
+}
+#padding-erase{
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.margin-erase{
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+#padding-generate-top{
+  padding-top:20px;
+}
+#padding-generate-bottom{
+  padding-bottom: 20px;
+}
+#menu-idle{
+  padding-top: 9px;
+}
+#textarea-text{
+  flex: 1;
+  height: 30rem;
+}
+.form-text{
+  display: flex;
+  flex-direction: column;
+}
+body{
+  height: 100%;
+}
+.px24{
+  font-size: 20px;
+}
