@@ -3,7 +3,7 @@
   require("./config/config.php");
 	require("./lib/db.php");
 	$conn = db_init($config["host"],$config["duser"],$config["dpw"],$config["dname"]);
-  $result = mysqli_query($conn, "SELECT * FROM donote_ahlpa_userznote_".$_SESSION['pid']);
+  $result = mysqli_query($conn, "SELECT * FROM account_data");
 ?>
 <html>
   <head>
@@ -34,7 +34,7 @@
         <ol class="nav" nav-stacked="" nav-pills="">
           <?php
             while ($row = mysqli_fetch_assoc($result)) {
-              echo '<li>'.$row["name"].' | '.$row["name"].'</li>'."\n";
+              echo '<li><a href="./view.php?user='.$row['pid'].'">'.$row['name']."<div class='text-right'>".$row["value"]."원</div>".'</li></a>'."\n";
             }
           ?>
         </ol>

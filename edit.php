@@ -4,6 +4,7 @@
 	require("./lib/db.php");
 	require("./lib/adminchk.php");
 	$conn = db_init($config["host"],$config["duser"],$config["dpw"],$config["dname"]);
+  $pid = $_GET['user'];
   $result = mysqli_query($conn, "SELECT * FROM account_data");
 ?>
 <html>
@@ -21,7 +22,7 @@
     <div class="container-fluid" id='padding-erase'>
       <div id="bgi">
         <div class="col-md-3">
-          <a href="./index.php" class='btn btn-link middle' id='white'>BKNG</a>
+          <a href="./admin.php" class='btn btn-link middle' id='white'>BKNG</a>
         </div>
         <div class="col-md-9">
           <div class="text-right">
@@ -32,14 +33,25 @@
     </div>
     <div class="container-fluid" id="padding-generate-top">
       <div class="col-md-12">
-        <ol class="nav" nav-stacked="" nav-pills="">
-          <?php
-            while ($row = mysqli_fetch_assoc($result)) {
-              echo '<li><a href="./edit.php?user='.$row['pid'].'">'.$row['name']."<div class='text-right'>".$row["value"]."원</div>".'</li></a>'."\n";
-            }
-          ?>
-          <li><a href="./add_creature.php">생명체 추가하기</li></a>
-        </ol>
+        <?php
+          $sql = "SELECT name FROM account_data WHERE pid='".$pid."'";
+          $result = mysqli_query($conn, $sql);
+          $row = mysqli_fetch_assoc($result);
+          $name = $row['name'];
+          echo '<form action="./function/edit.php?user='.$pid.'" method="post">'
+        ?>
+          <div class="form-group">
+            <label for="form-title">이름</label>
+            <?php
+              echo '<input type="text" class="form-control" name="name" id="form-title" placeholder='.$name.'>';
+            ?>
+          </div>
+          <div class="form-group">
+            <label for="form-title">변경할 금액</label>
+            <input class="form-control" name="amount" id="form-title" placeholder="변경할 양을 적어주세요."></input>
+          </div>
+          <input type="submit" name="additional" value="적용" class="btn btn-default btn-lg">
+        </form>
       </div>
     </div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
