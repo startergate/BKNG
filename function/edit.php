@@ -42,14 +42,9 @@
     $sql = "INSERT INTO hash_data (hash,name) VALUES ('$hash4','$hash_name')";
     $result = mysqli_query($conn, $sql);
 
-    echo $change_amount;
-    echo '<br />1';
-    echo $now_amount;
-    echo '<br />2';
-    echo $amount;
-    //echo "<script>window.alert('수정이 완료되었습니다..');</script>";
-    //echo "<script>window.location=('../admin.php');</script>";
-    //exit;
+    echo "<script>window.alert('수정이 완료되었습니다..');</script>";
+    echo "<script>window.location=('../admin.php');</script>";
+    exit;
   } else {
     echo "<script>window.alert('값이 입력되지 않았습니다.');</script>";
     echo "<script>window.location=('../edit.php?user=".$_GET['user']."');</script>";
