@@ -25,7 +25,6 @@
         </div>
         <div class="col-md-9">
           <div class="text-right">
-            <a href='./admin_edit.php' class='btn btn-link' id='white'>정보 변경</a>
             <a href='./function/logout.php' class='btn btn-link' id='white'>로그아웃</a>
           </div>
         </div>
@@ -33,14 +32,17 @@
     </div>
     <div class="container-fluid" id="padding-generate-top">
       <div class="col-md-12">
-        <ol class="nav" nav-stacked="" nav-pills="">
-          <?php
-            while ($row = mysqli_fetch_assoc($result)) {
-              echo '<li><a href="./edit.php?user='.$row['pid'].'">'.$row['name']."<div class='text-right'>".$row["value"]."원</div>".'</li></a>'."\n";
-            }
-          ?>
-          <li><a href="./add_creature.php">생명체 추가하기</li></a>
-        </ol>
+        <form action="./function/pw_edit.php" method="post">
+          <div class="form-group">
+            <label for="form-title">현재 비밀번호</label>
+            <input type="password" class="form-control" name="password_bef" id="form-title" placeholder="현재 비밀번호를 입력하세요.">
+          </div>
+          <div class="form-group">
+            <label for="form-title">변경할 비밀번호</label>
+            <input type="password" class="form-control" name="password_aft" id="form-title" placeholder="변경할 비밀번호를 입력하세요."></input>
+          </div>
+          <input type="submit" name="additional" value="적용" class="btn btn-default btn-lg">
+        </form>
       </div>
     </div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
