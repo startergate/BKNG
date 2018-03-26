@@ -1,18 +1,20 @@
-<?php
-  require("./config/config.php");
-	require("./lib/db.php");
-	$conn = db_init($config["host"],$config["duser"],$config["dpw"],$config["dname"]);
-  $result = mysqli_query($conn, "SELECT * FROM ".$_GET['user']."_data");
-  ?>
 <!DOCTYPE html>
+<?php
+  require("./config/config_root.php");
+	require("./lib/db.php");
+	require("./lib/reviewchk.php");
+
+  $ihash = $_GET['ihash'];
+?>
 <html>
   <head>
     <meta charset="utf-8">
     <title>BKNG</title>
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  	<link rel="stylesheet" type="text/css" href="./css/style.css?v=8">
+  	<link rel="stylesheet" type="text/css" href="./css/style.css?v=9">
     <link rel="stylesheet" type="text/css" href="./css/bg_style.css?v=1">
   	<link rel="stylesheet" type="text/css" href="./css/master.css">
+  	<link rel="stylesheet" type="text/css" href="./css/review.css">
   	<link rel="stylesheet" type="text/css" href="/Normalize.css">
     <script src="/bootstrap/js/bootstrap.min.js"></script>
   </head>
@@ -29,16 +31,18 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid" id="padding-generate-top">
+    <div class="container" id="padding-generate-top">
       <div class="col-md-12">
-        <ol class="nav" nav-stacked="" nav-pills="">
+        <div class="text-center margin-generate">
           <?php
-            while ($row = mysqli_fetch_assoc($result)) {
-              echo '<li><a href="./review-login.php?ihash='.$row['hash'].'">'.$row['edittime']."<div class='text-right'>".$row["amount"]."원</div>".'</li></a>'."\n";
-              echo "<hr>";
-            }
+            echo '<h2>거래를 되돌리시겠습니까?</h2>';
+            echo "<br />";
+            echo "<form class='margin_42_gen' action='./function/revert.php?ihash=".$ihash."' method='post'>";
+            echo "<input type='submit' name='confirm_revert' class='btn btn-danger btn-lg' value='확인!'>";
+            echo "<a href='./review.php?ihash=".$ihash."' class='btn btn-success btn-lg'>취소!</a>";
+            echo "</form>"
           ?>
-        </ol>
+        </div>
       </div>
     </div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

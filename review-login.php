@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
   session_start();
-  $_SESSION['hash'] = $_GET['id'];
+  $ihash = $_GET['ihash'];
 ?>
 <html>
   <head>
@@ -42,7 +42,7 @@
           <h3 class="longer-text"><strong>BKNG에서 거래 상세 정보를 보려면 로그인하세요.</strong></h3>
           <br />
           <?php
-            echo '<form id="form" action="./function/review.php?id='.$_GET['id'].' method="post">'
+            echo '<form id="form" action="./function/review.php?ihash='.$ihash.'" method="post">'
           ?>
             <input type="password" class="form-control" name="pw" id="form-title" placeholder="비밀번호">
             <br />

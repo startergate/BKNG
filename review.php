@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <?php
-  require("./config/config.php");
+  require("./config/config_root.php");
 	require("./lib/db.php");
-	require("./lib/adminchk.php");
+	require("./lib/reviewchk.php");
+
+  $ihash = $_GET['ihash'];
 	$conn = db_init($config["host"],$config["duser"],$config["dpw"],$config["dname"]);
-  $result = mysqli_query($conn, "SELECT name FROM hash_data WHERE hash LIKE ".$_GET['id']);
+  $result = mysqli_query($conn, "SELECT name FROM hash_data WHERE hash LIKE '".$ihash."'");
   $row = mysqli_fetch_assoc($result);
   $data = explode("_", $row['name']);
-  $user = $data[2];
+  $pid = $data[2];
 
-  $result = mysqli_query($conn, "SELECT name FROM ".$user."_data WHERE hash");
+  $result = mysqli_query($conn, "SELECT amount, edittime, status FROM ".$pid."_data WHERE hash LIKE '".$ihash."'");
   $row = mysqli_fetch_assoc($result);
   $amount = $row['amount'];
-  $time = $row['datetime'];
+  $time = $row['edittime'];
   $status = $row['status'];
+
+  $result = mysqli_query($conn, "SELECT name FROM account_data WHERE pid LIKE '".$pid."'");
+  $row = mysqli_fetch_assoc($result);
+  $name = $row['name'];
 ?>
 <html>
   <head>
@@ -46,21 +52,21 @@
         <br />
         <div class="review-margin-minus">
           <?php
-            echo $user."님의 거래 로그입니다.";
+            echo $name."님의 거래 로그입니다.";
           ?>
         </div>
         <br />
         <div class="text">거래 일시: <?php echo $time; ?></div>
         <br />
-        <div class="text">거래 금액: <?php echo $amount; ?></div>
-        <br />
+        <div class="text">거래 금액: <?php echo $amount."원"; ?></div>
         <?php if (!empty($status)) {
+          echo '<br />';
           echo "최초 거래입니다.";
         } ?>
         <br />
-        <br />
         <?php
-          echo "<a href='./revert.php?id=".$_GET['id']."' class='btn btn-danger btn-lg'>거래 취소</a>";
+          echo "<br />";
+          echo "<a href='./revert.php?ihash=".$ihash."' class='btn btn-danger btn-lg'>거래 취소</a>";
         ?>
       </div>
     </div>

@@ -37,6 +37,7 @@
           <?php
             while ($row = mysqli_fetch_assoc($result)) {
               echo '<li><a href="./edit.php?user='.$row['pid'].'">'.$row['name']."<div class='text-right'>".$row["value"]."원</div>".'</li></a>'."\n";
+              echo "<hr>";
             }
           ?>
           <li><a href="./add_creature.php">생명체 추가하기</li></a>

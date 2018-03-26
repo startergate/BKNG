@@ -3,7 +3,6 @@
 	require('../lib/db.php');	//DB Library
 	session_start();
 
-	if (!empty($_POST['pw'])) {
 		$pw_temp = $_POST['pw'];
 		$pw = hash("sha256",$pw_temp);
 		$conn = db_init($config["host"],$config["duser"],$config["dpw"],$config["dname"]);
@@ -16,16 +15,11 @@
 		$hash = $row['hash'];
 
 		if ($pw === $hash) {
-			$id = $_GET['id'];
 			$_SESSION['access'] = "admin_review";
-			header('Location: ../review.php?id='.$_GET['id']);
+			header('Location: ../review.php?ihash='.$_GET['ihash']);
 			exit;
 	 	} else {
-			echo "<script>window.alert('틀린 비밀번호를 입력하셨습니다.".$pw_temp."');</script>";	//Password Wrong
-			echo "<script>window.location=('../review-login.php');</script>";
+			echo "<script>window.alert('틀린 비밀번호를 입력하셨습니다.');</script>";	//Wrong Password Entered
+			echo "<script>window.location=('../review-login.php?ihash=".$_GET['ihash']."');</script>";
 		}
-	} else {
-		echo "<script>window.alert('비밀번호가 입력되지 않았습니다.');</script>";	//Password Empty
-		echo "<script>window.location=('../review-login.php');</script>";
-	}
 ?>

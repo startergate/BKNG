@@ -35,6 +35,7 @@
           <?php
             while ($row = mysqli_fetch_assoc($result)) {
               echo '<li><a href="./view.php?user='.$row['pid'].'">'.$row['name']."<div class='text-right'>".$row["value"]."원</div>".'</li></a>'."\n";
+              echo "<hr>";
             }
           ?>
         </ol>

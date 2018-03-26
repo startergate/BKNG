@@ -21,6 +21,7 @@
         </div>
         <div class="col-md-9">
           <div class="text-right">
+            <a href='./admin_edit.php' class='btn btn-link' id='white'>정보 변경</a>
             <a href='./function/logout.php' class='btn btn-link' id='white'>로그아웃</a>
           </div>
         </div>
