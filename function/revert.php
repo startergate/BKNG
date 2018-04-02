@@ -16,7 +16,7 @@
   $row = mysqli_fetch_assoc($result);
   $value = $row['value'];
 
-  $changedValue = $row
+  $changedValue = $row;
 
   $result = mysqli_query($conn, "UPDATE account_data SET value='1000' WHERE pid='".$pid."'");
   $row = mysqli_fetch_assoc($result);
